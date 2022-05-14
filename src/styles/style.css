@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kodchasan:wght@200&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: azure;
+}
+
+#main-container {
+  min-width: 300px;
+  width: 100%;
+}
+#main-container .row .col-12 {
+  border: 1px solid lightcyan;
+  border-radius: 3px;
+  padding: 0;
+}
+#main-container .row .col-12 #navbar {
+  background: linear-gradient(to left, #2980b9, #6dd5fa, #beeff7);
+}
+#main-container .row .col-12 #navbar #title {
+  margin: auto;
+  font-family: "Rubik Bubbles", cursive;
+  font-size: 2rem;
+  pointer-events: none;
+}
+#main-container .row .col-12 #add-item {
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  font-weight: bold;
+  font-family: "Kodchasan", sans-serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#main-container .row .col-12 #add-item #add-item-input {
+  border-radius: initial;
+  box-shadow: none;
+  font-weight: inherit;
+  border-bottom: none;
+  border-top: none;
+}
+#main-container .row .col-12 #add-item #add-item-btn {
+  border-radius: initial;
+  font-weight: inherit;
+  border-bottom: none;
+  border-top: none;
+  box-shadow: none;
+}
+#main-container .row .col-12 .item {
+  border-radius: initial;
+}
+#main-container .row .col-12 .item .item-body {
+  font-family: "Kodchasan", sans-serif;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+}
+#main-container .row .col-12 .item .item-body .item-text-check {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+#main-container .row .col-12 .item .item-body .item-delete {
+  border-radius: 25px;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kodchasan:wght@200&display=swap");
+// gradients colors
+$first_color_gradient: #2980b9;
+$second_color_gradient: #6dd5fa;
+$third_color_gradient: #beeff7;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: azure;
+}
+
+#main-container {
+    min-width: 300px;
+    width: 100%;
+    .row {
+        .col-12 {
+            border: 1px solid lightcyan;
+            border-radius: 3px;
+            padding: 0;
+            #navbar {
+                background: linear-gradient( to left, $first_color_gradient, $second_color_gradient, $third_color_gradient);
+                #title {
+                    margin: auto;
+                    font-family: "Rubik Bubbles", cursive;
+                    font-size: 2rem;
+                    pointer-events: none;
+                }
+            }
+            #add-item {
+                border-bottom: 1px solid black;
+                border-top: 1px solid black;
+                font-weight: bold;
+                font-family: "Kodchasan", sans-serif;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                & #add-item-input {
+                    border-radius: initial;
+                    box-shadow: none;
+                    font-weight: inherit;
+                    border-bottom: none;
+                    border-top: none;
+                }
+                & #add-item-btn {
+                    border-radius: initial;
+                    font-weight: inherit;
+                    border-bottom: none;
+                    border-top: none;
+                    box-shadow: none;
+                }
+            }
+            .item {
+                border-radius: initial;
+                .item-body {
+                    font-family: "Kodchasan", sans-serif;
+                    font-weight: bold;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-bottom: 1px solid black;
+                    .item-text-check {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .item-delete {
+                        border-radius: 25px;
+                    }
+                }
+            }
+        }
+    }
+}
