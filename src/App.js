@@ -1,14 +1,16 @@
 import React, { useEffect, useState, startTransition } from 'react';
 import { Container, Row, Col } from "react-bootstrap"
+
+import { connect } from "react-redux"
+import { createTask, deleteTask, expireTask, getTasks } from './actionsCreators';
+
 import Header from './components/Header'
 import AddItem from './components/AddItem';
 import DisplayItem from './components/DisplayItem';
 import AlertDanger from './components/AlertDanger';
 
+function App(props) {
 
-function App() {
-
-  const [items, setItems] = useState([{ item: "learn how to code", expire: true }]);
   const [value, setValue] = useState("");
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState('');
@@ -21,12 +23,10 @@ function App() {
   }
 
   const addFunc = (data) => {
-    if (!items.find((e) => (e.item === data))) {
-
+    if (!props.items.find((e) => (e.item === data))) {
       if (data !== "") {
-        setItems([{ item: data, expire: false }, ...items]);
+        props.createItem({ item: data, expire: false });
         startTransition(() => {
-
           setValue("");
         });
       }
@@ -47,22 +47,17 @@ function App() {
   }
 
   const deleteFunc = (data) => {
-    setItems([...items.filter((e, i) => (e.item !== data))]);
+    props.deleteItem(props.items.find((e, i) => (e.item === data)));
   }
 
   const expireFunc = (data, event) => {
-
-    setItems([...items.map((e, i) => {
-      if (e.item === data) {
-        e.expire = event.target.checked;
-      }
-      return e;
-    })]);
-
+    props.expireItem(props.items.find((e, i) => (e.item === data)), event.target.checked);
   }
 
   useEffect(() => {
 
+    props.getItems();
+    console.log(props.items);
     const clickFunc = (e) => {
       if (e.keyCode === 13 && value !== "") {
         addFunc(value);
@@ -86,7 +81,7 @@ function App() {
           <Header />
           <AddItem addFunc={addFunc} value={value} setValue={setValue} />
           {
-            items.map((e, index) => (
+            props.items.map((e, index) => (
               <DisplayItem key={index} data={e.item} expire={e.expire} index={index} expireFunc={expireFunc} deleteFunc={deleteFunc} />
             ))
           }
@@ -97,4 +92,17 @@ function App() {
   );
 }
 
-export default App;
+
+const mapStateToProps = (state) => ({
+  items: state.items
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getItems: () => dispatch(getTasks()),
+  createItem: (item) => dispatch(createTask(item)),
+  deleteItem: (item) => dispatch(deleteTask(item)),
+  expireItem: (item, expire) => dispatch(expireTask(item, expire))
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
