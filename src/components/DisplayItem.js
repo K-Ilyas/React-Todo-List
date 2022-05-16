@@ -6,7 +6,7 @@ const expireStyle = {
     textDecoration: "line-through"
 };
 
-function DisplayItem({ data, expire, index, expireFunc, deleteFunc }) {
+function DisplayItem({ data, expire, id, expireFunc, deleteFunc }) {
     return (
         <Card className="item">
             <Card.Body className="item-body" >
@@ -18,11 +18,11 @@ function DisplayItem({ data, expire, index, expireFunc, deleteFunc }) {
                         type="switch"
                         id="custom-switch"
                         checked={expire}
-                        onChange={expireFunc.bind(this, data)}
+                        onChange={expireFunc.bind(this, id)}
                     />
                     {data}
                 </Form>
-                <Button onClick={deleteFunc.bind(null, data)} className="item-delete" variant="outline-danger">
+                <Button onClick={deleteFunc.bind(null, id)} className="item-delete" variant="outline-danger">
                     <i className="fa fa-trash" aria-hidden="true" ></i>
                 </Button>
             </Card.Body>

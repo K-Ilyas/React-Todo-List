@@ -1,23 +1,40 @@
-import { GET_TASKS, CREATE_TASK, DELETE_TASK, EXPIRE_TASK } from "../action";
+import { GET_TASKS, REQUEST_TASKS, CREATE_TASK, DELETE_TASK, EXPIRE_TASK } from "../action";
 
 const defaultState = {
-    items: [{ item: "learn how to code", expire: true }]
+    loading: false,
+    items: []
 }
 
 const reducer = (state = defaultState, action) => {
 
+
+
+    const maxId = (item) => {
+        item.id = state.items[state.items.length - 1].id + 1;
+        return item;
+    }
+
     switch (action.type) {
+        case REQUEST_TASKS:
+            return {
+                loading: true,
+                items: []
+            };
         case GET_TASKS:
-            return state;
+            return {
+                loading: false,
+                items: action.payload
+            };
         case CREATE_TASK:
-            return { items: [action.payload, ...state.items] };
+            return { loading: false, items: [...state.items, maxId(action.payload)] };
         case DELETE_TASK:
-            return { items: [...state.items.filter((e) => e.item !== action.payload.item)] };
+            return { loading: false, items: [...state.items.filter((e) => e.id !== action.payload.id)] };
         case EXPIRE_TASK:
             return {
+                loading: false,
                 items: [...state.items.map((e) => {
-                    if (e.item === action.payload.item)
-                        e.expire = action.expire;
+                    if (e.title === action.payload.title)
+                        e.completed = action.payload.completed;
                     return e;
                 })]
             };

@@ -1,9 +1,16 @@
-import { GET_TASKS, CREATE_TASK, DELETE_TASK, EXPIRE_TASK } from "./action";
+import { REQUEST_TASKS, GET_TASKS, CREATE_TASK, DELETE_TASK, EXPIRE_TASK } from "./action";
 
 
-export const getTasks = () => {
+export const requestTasks = () => {
     return {
-        type: GET_TASKS
+        type: REQUEST_TASKS
+    }
+};
+
+export const getTasks = (data) => {
+    return {
+        type: GET_TASKS,
+        payload: data
     }
 };
 
@@ -21,10 +28,9 @@ export const deleteTask = (data) => {
     }
 };
 
-export const expireTask = (data, expire) => {
+export const expireTask = (data) => {
     return {
         type: EXPIRE_TASK,
-        payload: data,
-        expire
+        payload: data
     }
 };
